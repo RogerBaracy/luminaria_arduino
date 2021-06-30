@@ -1,0 +1,5 @@
+.env
+.history
+node_modules
+docker-compose.yml
+Dockerfile

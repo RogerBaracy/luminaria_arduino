@@ -19,8 +19,32 @@ const db = firebase.database();
 // Initialize Arduíno
 const board = new five.Board();
 board.on("ready", function () {
-  const led = new five.Led(13);
-  db.ref("status").on("value", snapshot => {
-    snapshot.val() === true ? led.on() : led.off();
+  const yellow = new five.Led(8);
+  const green = new five.Led(9);
+  const red = new five.Led(10);
+
+  db.ref("color").on("value", (snapshot) => {
+    const color = snapshot.val();
+    switch (color) {
+      case "amarelo":
+        yellow.on();
+        break;
+      case "verde":
+        green.on();
+        break;
+      case "vermelho":
+        red.on();
+        break;
+      case "ligar":
+        yellow.on();
+        green.on();
+        red.on();
+        break;
+      case "desligar":
+        yellow.off();
+        green.off();
+        red.off();
+        break;
+    }
   });
 });
